@@ -1,0 +1,20 @@
+{
+    "inn": {
+        "messages": {
+            "rested": "You woke up refreshed and ready to kill more monsters.",
+            "notEnoughGold": "You don't have enough money to stay here."
+        }
+    },
+    "academy": {
+        "messages": {
+            "notEnoughItems": "You don't have enough items to get the diploma.",
+            "enoughItems": "You got the diploma. Congratulations!"
+        }
+    },
+    "merchant": {
+        "items": [
+            "s_potion",
+            "m_potion"
+        ]
+    }
+}

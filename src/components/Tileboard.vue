@@ -1,28 +1,189 @@
 <template>
-  <div  class="tileWorld">
-   <div v-for="tile in tiles" class="tile">
-    a
-   </div>
+  <div class="tileWorld">
+    <div v-for="(row, x) in tilesMatrix" class="row" :key="x">
+      <div v-for="(cell, y) in row" class="cell" :key="[x, y]">
+        <Tile :coordinates="[x, y]" :tile="cell">
+          <div
+            v-if="coordinates[0] === x && coordinates[1] === y"
+            class="character"
+          ></div>
+        </Tile>
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
-let tiles = [1,2,3,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99]
+<script>
+import monsters from "../assets/monsters.json";
+
+import Tile from "./Tile.vue";
+import { useCharacterStore } from "@/stores/character";
+import { mapState, mapActions } from "pinia";
+export default {
+  name: "Tileboard",
+  components: {
+    Tile,
+  },
+  props: {
+    inBattle: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  computed: {
+    ...mapState(useCharacterStore, {
+      characterStore: (state) => state,
+    }),
+    xCoordinate() {
+      return this.coordinates[0];
+    },
+    yCoordinate() {
+      return this.coordinates[1];
+    },
+  },
+  data() {
+    return {
+      monstersArray: monsters.monsters,
+      tilesMatrix: [
+        ["F", "F", "F", "F", "F", "F", "F", "F", "P", "F"],
+        ["F", "F", "F", "F", "F", "F", "F", "F", "P", "F"],
+        ["M", "P", "P", "P", `P`, "F", "F", "F", "P", "F"],
+        ["M", "P", "P", "P", "P", "P", "P", "P", "P", "F"],
+        ["P", "P", "P", "P", "P", "P", "P", "P", "P", "F"],
+        ["P", "P", "P", "P", "P", "C", "P", "P", "P", "F"],
+        ["P", "P", "P", "P", "P", "P", "P", "P", "P", "F"],
+        ["M", "F", "F", "P", "P", "P", "P", "P", "P", "F"],
+        ["M", "F", "F", "F", "P", "P", "F", "F", "F", "F"],
+        ["M", "M", "F", "F", "F", "P", "F", "F", "M", "M"],
+      ],
+      coordinates: [5, 5],
+    };
+  },
+  watch: {
+    coordinates: {
+      deep: true,
+      handler: function () {
+        this.setCurrentTerrain(
+          this.tilesMatrix[this.xCoordinate][this.yCoordinate]
+        );
+        if (this.characterNotInCity()) {
+          this.chanceMonsterEncounter();
+        }
+      },
+    },
+  },
+  created() {
+    document.addEventListener("keydown", this.moveCharacter);
+  },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.moveCharacter);
+  },
+  mounted() {
+    this.setCurrentTerrain(
+      this.tilesMatrix[this.xCoordinate][this.yCoordinate]
+    );
+  },
+  methods: {
+    ...mapActions(useCharacterStore, ["setCurrentTerrain"]),
+    characterNotInCity() {
+      return this.characterStore.currentTerrain !== "C";
+    },
+    chanceMonsterEncounter() {
+      const random = Math.floor(Math.random() * 100);
+      if (random < 15) {
+        const chosenMonster = this.checkForMonster();
+        this.$emit("monsterBattle", chosenMonster);
+      }
+    },
+    checkForMonster() {
+      const currentTile = this.tilesMatrix[this.xCoordinate][this.yCoordinate];
+      const random = Math.random();
+      let cumulativeChance = 0;
+      let chosenMonster;
+      this.monstersArray.every((monster) => {
+        cumulativeChance += monster.chance[currentTile];
+        if (random < cumulativeChance) {
+          chosenMonster = JSON.parse(JSON.stringify(monster));
+          return false;
+        }
+        return true;
+      });
+      return chosenMonster;
+    },
+    moveUp() {
+      if (this.coordinates[0] > 0) {
+        this.coordinates[0] = this.coordinates[0] - 1;
+      }
+    },
+    moveDown() {
+      if (this.coordinates[0] < this.tilesMatrix.length - 1) {
+        this.coordinates[0] = this.coordinates[0] + 1;
+      }
+    },
+    moveLeft() {
+      if (this.coordinates[1] > 0) {
+        this.coordinates[1] = this.coordinates[1] - 1;
+      }
+    },
+    moveRight() {
+      if (this.coordinates[1] < this.tilesMatrix[0].length - 1) {
+        this.coordinates[1] = this.coordinates[1] + 1;
+      }
+    },
+    moveCharacter(e) {
+      if (!this.inBattle) {
+        if (
+          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
+        ) {
+          e.preventDefault();
+        }
+        switch (e.key) {
+          case "ArrowUp":
+            this.moveUp();
+            break;
+          case "ArrowDown":
+            this.moveDown();
+            break;
+          case "ArrowLeft":
+            this.moveLeft();
+            break;
+          case "ArrowRight":
+            this.moveRight();
+            break;
+        }
+      }
+    },
+  },
+};
 </script>
 
-
 <style scoped>
+.character {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  margin: auto;
+}
 .tileWorld {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  grid-gap: 1rem;
-  padding: 1rem;
+  padding: 15px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+}
+.cell {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.tile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 </style>

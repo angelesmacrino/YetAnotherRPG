@@ -1,0 +1,20 @@
+{
+    "locations": {
+        "C": {
+            "name": "The City",
+            "description": "Total population: 4"
+        },
+        "P": {
+            "name": "Plains",
+            "description": "Green plains, you can see forever." 
+        },
+        "M": {
+            "name": "Mountains",
+            "description": "Barren mountains, beware of the troll." 
+        },
+        "F": {
+            "name": "Forest",
+            "description": "A lush forest, but full of vermin." 
+        }
+    }
+}

@@ -1,0 +1,75 @@
+{
+    "monsters": 
+    [
+        {
+            "name": "Goblin",
+            "level": 1,
+            "chance": {
+                "P":  0.9,
+                "F": 0.5,
+                "M": 0.1
+            },
+            "base_health": 10,
+            "health_per_level": 2,
+            "base_attack": 2,
+            "attack_per_level": 1,
+            "base_defense": 1,
+            "defense_per_level": 1,
+            "base_speed": 2,
+            "speed_per_level": 1,
+            "base_gold": 5,
+            "gold_per_level": 2,
+            "base_exp": 5,
+            "exp_per_level": 3,
+            "drop": "g_tooth",
+            "drop_rate": 0.1
+        },
+        {
+            "name": "Orc",
+            "level": 2,
+            "chance": {
+                "P": 0.1,
+                "F": 0.4,
+                "M": 0.2
+            },
+            "base_health": 20,
+            "health_per_level": 3,
+            "base_attack": 4,
+            "attack_per_level": 1,
+            "base_defense": 2,
+            "defense_per_level": 1,
+            "base_speed": 1.5,
+            "speed_per_level": 1,
+            "base_gold": 15,
+            "gold_per_level": 4,
+            "base_exp": 10,
+            "exp_per_level": 10,
+            "drop": "orc_ear",
+            "drop_rate": 0.05
+        },
+        {
+            "name": "Troll",
+            "level": 2,
+            "chance": {
+                "P": 0,
+                "F": 0.1,
+                "M": 0.7
+            },
+            "base_health": 30,
+            "health_per_level": 4,
+            "base_attack": 6,
+            "attack_per_level": 2,
+            "base_defense": 3,
+            "defense_per_level": 2,
+            "base_speed": 4,
+            "speed_per_level": 1,
+            "base_gold": 20,
+            "gold_per_level": 5,
+            "base_exp": 15,
+            "exp_per_level": 10,
+            "drop": "troll_hide",
+            "drop_rate": 0.01
+        }
+    ]
+
+}

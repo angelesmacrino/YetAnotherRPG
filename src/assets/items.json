@@ -1,0 +1,46 @@
+{
+    "items": {
+        "s_potion": {
+            "id": "s_potion",
+            "name": "Small healing potion",
+            "description": "A potion that restores 10 points of health. Who needs hospitals when you have one of these bad boys?",
+            "type": "consumable",
+            "health": 10,
+            "price": 10
+        },
+        "m_potion": {
+            "id": "m_potion",
+            "name": "Medium healing potion",
+            "description": "A potion that restores 20 points of health. Who needs hospitals when you have one of these bad boys?",
+            "type": "consumable",
+            "health": 20,
+            "price": 20
+        },
+        "w_sword": {
+            "id": "w_sword",
+            "name": "Wooden sword",
+            "description": "You have to start with something",
+            "type": "weapon",
+            "damage": [1,4],
+            "price": 10
+        },
+        "g_tooth": {
+            "id": "g_tooth",
+            "name": "Goblin tooth",
+            "description": "A tooth from a goblin. It's not worth much, but it's better than nothing.",
+            "type": "quest"
+        },
+        "orc_ear": {
+            "id": "orc_ear",
+            "name": "Orc ear",
+            "description": "An ear from an orc. It's not worth much, but it's better than nothing.",
+            "type": "quest"
+        },
+        "troll_hide": {
+            "id": "troll_hide",
+            "name": "Troll hide",
+            "description": "A hide from a troll. It's not worth much, but it's better than nothing.",
+            "type": "quest"
+        }
+    }
+}
