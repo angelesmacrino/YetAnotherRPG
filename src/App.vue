@@ -1,23 +1,5 @@
 <template>
   <div class="gameContainer">
-    <draggable
-      v-for="(item, index) in images"
-      v-model="images[index]"
-      group="image"
-      animation="150"
-      selected-class="sortableSelected"
-      ghost-class="imageGhost"
-      @change="imagesChanged"
-      tag="v-layout"
-      class="sortableRow imageContainer"
-      :component-data="{ row: true }"
-      :force-fallback="true"
-      multi-drag
-    >
-      <v-flex v-for="image in item" class="droppableImage" :key="image.path">
-        {{ image }}
-      </v-flex>
-    </draggable>
     <Tileboard
       v-if="!gameIsOver"
       @monsterBattle="monsterBattle"
@@ -65,7 +47,6 @@ import CurrentLocationInfoAndStats from "./components/CurrentLocationInfoAndStat
 import { useCharacterStore } from "@/stores/character";
 import { mapState, mapActions } from "pinia";
 
-import draggable from "vuedraggable";
 
 export default {
   computed: {
@@ -79,8 +60,7 @@ export default {
     Character,
     AfterBattleModal,
     GameOver,
-    CurrentLocationInfoAndStats,
-    draggable,
+    CurrentLocationInfoAndStats
   },
   data() {
     return {
@@ -89,16 +69,7 @@ export default {
       afterBattleModal: false,
       gameIsOver: false,
       lookingAtCharacter: false,
-      after_battle_event: "",
-      images: [[
-      'Real-Time',
-      'Audience',
-      'Conversions',
-    ],[
-      'Real-Time2',
-      'Audience2',
-      'Conversions2',
-    ]]
+      after_battle_event: ""
     };
   },
   methods: {
