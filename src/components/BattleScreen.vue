@@ -69,7 +69,7 @@
           </div>
         </div>
       </div>
-      <div class="victoryScreen" v-else>
+      <div class="victoryScreen nes-container is-rounded" v-else>
         <h1>Victory!</h1>
         <h3>You gained {{ monster.exp }} xp</h3>
         <h3>You gained {{ monster.gold }} gold</h3>
@@ -237,11 +237,7 @@ export default {
 </script>
 
 <style scoped>
-.victoryScreen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+
 .disabled {
   pointer-events: none;
   opacity: 0.5;
@@ -282,9 +278,7 @@ export default {
   height: 400px;
   padding: 20px;
   background-color: white;
-  border-radius: 10px;
   z-index: 6000;
-  border: 5px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;

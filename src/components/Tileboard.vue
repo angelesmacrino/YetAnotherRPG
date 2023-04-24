@@ -2,7 +2,7 @@
   <div class="tileWorld">
     <div v-for="(row, x) in tilesMatrix" class="row" :key="x">
       <div v-for="(cell, y) in row" class="cell" :key="[x, y]">
-        <Tile :coordinates="[x, y]" :tile="cell">
+        <Tile :ref="tilesMatrix[x][y]" :coordinates="[x, y]" :tile="cell">
           <div
             v-if="coordinates[0] === x && coordinates[1] === y"
             class="character"
@@ -15,7 +15,6 @@
 
 <script>
 import monsters from "../assets/monsters.json";
-
 import Tile from "./Tile.vue";
 import { useCharacterStore } from "@/stores/character";
 import { mapState, mapActions } from "pinia";

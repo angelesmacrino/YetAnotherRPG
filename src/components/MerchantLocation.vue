@@ -1,5 +1,5 @@
 <template>
-  <p class="merchantItemDescription m-0">{{ message }}</p>
+  <p class="smallerParagraph m-0">{{ message }}</p>
   <button class="nes-btn" @click="toggleBuyScreen()">
     Browse items to buy
   </button>

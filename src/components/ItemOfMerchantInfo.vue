@@ -2,7 +2,7 @@
   <p style="margin: 0px">
     <b> {{ item.name }}: {{ item.price }} gp </b>
   </p>
-  <p class="merchantItemDescription">{{ item.description }}</p>
+  <p class="smallerParagraph">{{ item.description }}</p>
   <button class="nes-btn p-0" :disabled="!canBuyItem()" @click="buyItem()">Buy</button>
 </template>
 

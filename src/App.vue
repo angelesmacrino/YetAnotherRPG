@@ -1,5 +1,23 @@
 <template>
   <div class="gameContainer">
+    <draggable
+      v-for="(item, index) in images"
+      v-model="images[index]"
+      group="image"
+      animation="150"
+      selected-class="sortableSelected"
+      ghost-class="imageGhost"
+      @change="imagesChanged"
+      tag="v-layout"
+      class="sortableRow imageContainer"
+      :component-data="{ row: true }"
+      :force-fallback="true"
+      multi-drag
+    >
+      <v-flex v-for="image in item" class="droppableImage" :key="image.path">
+        {{ image }}
+      </v-flex>
+    </draggable>
     <Tileboard
       v-if="!gameIsOver"
       @monsterBattle="monsterBattle"
@@ -46,6 +64,9 @@ import GameOver from "./components/GameOver.vue";
 import CurrentLocationInfoAndStats from "./components/CurrentLocationInfoAndStats.vue";
 import { useCharacterStore } from "@/stores/character";
 import { mapState, mapActions } from "pinia";
+
+import draggable from "vuedraggable";
+
 export default {
   computed: {
     ...mapState(useCharacterStore, {
@@ -59,6 +80,7 @@ export default {
     AfterBattleModal,
     GameOver,
     CurrentLocationInfoAndStats,
+    draggable,
   },
   data() {
     return {
@@ -68,6 +90,15 @@ export default {
       gameIsOver: false,
       lookingAtCharacter: false,
       after_battle_event: "",
+      images: [[
+      'Real-Time',
+      'Audience',
+      'Conversions',
+    ],[
+      'Real-Time2',
+      'Audience2',
+      'Conversions2',
+    ]]
     };
   },
   methods: {
@@ -177,7 +208,7 @@ export default {
 .m-0 {
   margin: 0 !important;
 }
-.merchantItemDescription {
+.smallerParagraph {
   font-size: 0.8rem;
   display: inline;
 }
@@ -232,7 +263,9 @@ export default {
 
 @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
   .nes-container.is-rounded,
-  .nes-btn, .nes-progress, .nes-textarea {
+  .nes-btn,
+  .nes-progress,
+  .nes-textarea {
     border-image-repeat: stretch !important;
   }
 }

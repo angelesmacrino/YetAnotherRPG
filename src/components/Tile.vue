@@ -1,10 +1,15 @@
 <template>
-  <div class="tile" :class="setTileTypeClass()">
+  <div class="tile" :style="{ backgroundImage: `url(${setTileTypeClass()})` }">
     <slot></slot>
   </div>
 </template>
 
 <script>
+import grassTile from "../assets/img/grass3.jpg"
+import forestTile from "../assets/img/forest.jpg"
+import cityTile from "../assets/img/city.jpg"
+import mountainTile from "../assets/img/mountain.jpg"
+
 export default {
   props: {
     coordinates: {
@@ -19,13 +24,13 @@ export default {
   methods: {
     setTileTypeClass() {
       if (this.tile === 'C') {
-        return 'tileCity'
+        return cityTile
       } else if (this.tile === 'P') {
-        return 'tilePlains'
+        return grassTile
       } else if (this.tile === 'M') {
-        return 'tileMountains'
+        return mountainTile
       } else if (this.tile === 'F') {
-        return 'tileForest'
+        return forestTile
       }
     }
   }
@@ -33,6 +38,7 @@ export default {
 </script>
 
 <style scoped>
+
 .tile {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -46,7 +52,7 @@ export default {
   background-color: #91bdff;
 }
 .tilePlains {
-  background-color: #56ff6f;
+
 }
 .tileMountains {
   background-color: #7a4e0a;

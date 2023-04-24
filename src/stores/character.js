@@ -13,7 +13,7 @@ export const useCharacterStore = defineStore("characterStore", {
       defense: 1,
       speed: 2,
       level: 1,
-      exp: 90,
+      exp: 0,
       gold: 10,
       INVENTORY_LIMIT: 10,
       inventory: ["w_sword", "s_potion"],

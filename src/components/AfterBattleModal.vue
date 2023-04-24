@@ -50,9 +50,7 @@ export default {
   /* height: 200px; */
   padding: 20px;
   background-color: white;
-  border-radius: 10px;
   z-index: 3;
-  border: 5px solid black;
   display: flex;
   flex-direction: column;
   justify-content: start;
