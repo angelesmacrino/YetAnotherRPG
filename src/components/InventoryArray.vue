@@ -4,8 +4,7 @@
       <b> Inventory </b>
     </p>
     <ul class="inventoryList">
-      <li v-for="item in Object.keys(itemApiling)" :key="item">
-        {{ item[0] }}
+      <li v-for="item in Object.keys(itemApiling)" :key="item" :style="{ backgroundImage: `url(${setItemImg(item)})` }">
         <small class="itemQuantity">
           <b>
             {{ itemApiling[item] }} 
@@ -17,6 +16,10 @@
 </template>
 
 <script>
+import s_potion from "../assets/img/s_potion.jpg";
+import m_potion from "../assets/img/m_potion.jpg";
+import l_potion from "../assets/img/l_potion.jpg";
+
 export default {
   computed: {
     itemApiling() {
@@ -38,6 +41,17 @@ export default {
       default: () => [],
     },
   },
+  methods: {
+    setItemImg(item) {
+      if (item === "s_potion") {
+        return s_potion;
+      } else if (item === "M") {
+        return m_potion;
+      } else if (item === "L") {
+        return l_potion;
+      }
+    },
+  }
 };
 </script>
 
