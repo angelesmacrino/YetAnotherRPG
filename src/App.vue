@@ -210,8 +210,8 @@ export default {
 .inventoryList li {
   display: inline-block;
   position: relative;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   padding: 5px;
   margin: 3px;
   border: 3px solid black;
@@ -222,6 +222,7 @@ export default {
 .inventoryList li small {
   position: absolute;
   bottom: 10px;
+  right: 5px;
   width: 5px;
   height: 5px;
   color: orangered;
